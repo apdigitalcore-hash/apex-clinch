@@ -45,7 +45,7 @@ function LeadForm() {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const body = `Name: ${data.get("name")}\nCoaching Type: ${data.get("type")}\nCity/Province: ${data.get("city")}\nPhone: ${data.get("phone")}`;
-    window.location.href = `mailto:hello@ap-digital.ca?subject=Strategy Call Request - ${data.get("type")} Coach in ${data.get("city")}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:apdigital.core@gmail.com?subject=Strategy Call Request - ${data.get("type")} Coach in ${data.get("city")}&body=${encodeURIComponent(body)}`;
   };
   return (
     <Section>
@@ -488,7 +488,7 @@ function Footer() {
   return (
     <footer className="section-deep py-10 px-5 text-center space-y-2">
       <p className="text-sm opacity-40">© 2026 AP Digital — Pitt Meadows, BC Canada</p>
-      <p className="text-sm opacity-40">hello@ap-digital.ca</p>
+      <p className="text-sm opacity-40">apdigital.core@gmail.com</p>
       <p className="text-sm">
         <a href="https://ap-digital.ca" className="opacity-60 hover:opacity-100 underline transition-opacity duration-200">
           ← Back to AP Digital | Full-Service Digital Marketing
