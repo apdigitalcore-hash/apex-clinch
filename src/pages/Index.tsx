@@ -1,4 +1,4 @@
-import { useEffect, useRef, ReactNode } from "react";
+import { useEffect, useRef, ReactNode, FormEvent } from "react";
 
 const CALENDLY_URL = "https://calendly.com/apdigital-core/30min";
 
@@ -39,6 +39,72 @@ function CTAButton({ children, className = "" }: { children: ReactNode; classNam
   );
 }
 
+/* ─── LEAD FORM ─── */
+function LeadForm() {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const body = `Name: ${data.get("name")}\nCoaching Type: ${data.get("type")}\nCity/Province: ${data.get("city")}\nPhone: ${data.get("phone")}`;
+    window.location.href = `mailto:hello@ap-digital.ca?subject=Strategy Call Request - ${data.get("type")} Coach in ${data.get("city")}&body=${encodeURIComponent(body)}`;
+  };
+  return (
+    <Section>
+      <div className="max-w-2xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl font-black leading-tight mb-3 text-center">Ready to Fill Your Coaching Calendar?</h2>
+        <p className="text-center opacity-60 mb-8 text-base md:text-lg leading-relaxed">
+          Book a free 20-minute call. We'll show you exactly how many potential clients are searching for coaches like you in your area.
+        </p>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            name="name"
+            type="text"
+            placeholder="Full Name"
+            required
+            className="w-full rounded-lg border px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2"
+            style={{ background: "hsla(254,100%,64%,0.05)", border: "1px solid hsla(254,100%,64%,0.25)", color: "inherit" }}
+          />
+          <select
+            name="type"
+            required
+            className="w-full rounded-lg px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2"
+            style={{ background: "hsla(254,100%,64%,0.05)", border: "1px solid hsla(254,100%,64%,0.25)", color: "inherit" }}
+          >
+            <option value="" disabled>Coaching Type</option>
+            <option>Life Coach</option>
+            <option>Business Coach</option>
+            <option>Fitness Coach</option>
+            <option>Health Coach</option>
+            <option>Other</option>
+          </select>
+          <input
+            name="city"
+            type="text"
+            placeholder="City / Province"
+            required
+            className="w-full rounded-lg border px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2"
+            style={{ background: "hsla(254,100%,64%,0.05)", border: "1px solid hsla(254,100%,64%,0.25)", color: "inherit" }}
+          />
+          <input
+            name="phone"
+            type="tel"
+            placeholder="Phone Number"
+            required
+            className="w-full rounded-lg border px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2"
+            style={{ background: "hsla(254,100%,64%,0.05)", border: "1px solid hsla(254,100%,64%,0.25)", color: "inherit" }}
+          />
+          <button
+            type="submit"
+            className="w-full rounded-lg font-extrabold py-4 text-base md:text-lg tracking-wide transition-colors duration-200"
+            style={{ background: "hsl(25, 95%, 53%)", color: "white" }}
+          >
+            Book My Free Strategy Call
+          </button>
+        </form>
+      </div>
+    </Section>
+  );
+}
+
 /* ─── 1. HERO ─── */
 function HeroSection() {
   return (
@@ -48,8 +114,8 @@ function HeroSection() {
           <span className="w-2 h-2 rounded-full bg-purple inline-block" /> MARKETING FOR PRIVATE COACHES | BC CANADA
         </span>
 
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.95] tracking-tight mt-8 mb-6" style={{ textWrap: "balance" as any }}>
-          ARE YOU POSTING EVERY DAY BUT STILL HAVE NO CLIENTS?
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-[0.95] tracking-tight mt-8 mb-6" style={{ textWrap: "balance" as any }}>
+          BC Coaching Marketing — Get More Clients with Meta Ads &amp; Content
         </h1>
 
         <p className="text-lg md:text-xl max-w-3xl mx-auto mb-10 opacity-60 leading-relaxed" style={{ textWrap: "pretty" as any }}>
@@ -265,20 +331,25 @@ function WhoIsForSection() {
 function TestimonialsSection() {
   const testimonials = [
     {
-      text: "I'd been posting on Instagram for 8 months with barely 200 followers and zero clients from it. Arjun built a content strategy, ran our ads, and we had 12 discovery calls booked in the first 6 weeks.",
-      name: "Sarah K.",
-      role: "Online Fitness Coach, Vancouver BC",
+      text: "I was posting on Instagram every day and barely getting DMs. AP Digital set up a simple Meta Ads campaign and I had 6 discovery calls booked in the first month.",
+      name: "Sarah M.",
+      role: "Life Coach — Vancouver, BC",
     },
     {
-      text: "Every agency I spoke to before Arjun was going to run generic ads. He understood that coaching is about trust first. The content sounds like me, positions me as the expert, and the ads bring in the right people.",
-      name: "Marcus T.",
-      role: "Mindset Coach, Surrey BC",
+      text: "The ROI is real. I charge $2,500 for my business coaching package and I signed two new clients in the first 5 weeks. The ads paid for themselves fast.",
+      name: "James K.",
+      role: "Business Coach — Burnaby, BC",
+    },
+    {
+      text: "Arjun understood the coaching space right away. He didn't treat me like just another client — he actually knew what makes coaching ads convert.",
+      name: "Priya L.",
+      role: "Fitness Coach — Surrey, BC",
     },
   ];
   return (
     <Section>
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight mb-12">What clients are saying:</h2>
-      <div className="grid md:grid-cols-2 gap-8">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight mb-12">What BC Coaches Are Saying</h2>
+      <div className="grid md:grid-cols-3 gap-8">
         {testimonials.map((t, i) => (
           <div key={i} className="bg-white rounded-xl p-8 shadow-lg relative" style={{ borderTop: "4px solid hsl(254, 100%, 64%)" }}>
             <div className="text-xl mb-4" style={{ color: "hsl(38, 92%, 50%)" }}>★★★★★</div>
@@ -390,12 +461,39 @@ function FinalCTASection() {
   );
 }
 
+/* ─── COACHING TYPES ─── */
+function CoachingTypesSection() {
+  const types = ["Life Coaches", "Business Coaches", "Fitness Coaches", "Health & Wellness Coaches", "Mindset Coaches", "Career Coaches", "Executive Coaches"];
+  return (
+    <Section>
+      <div className="text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight mb-8">We Work With All Types of BC Coaches</h2>
+        <div className="flex flex-wrap justify-center gap-3 mb-8">
+          {types.map((t) => (
+            <span key={t} className="rounded-full px-5 py-2 text-sm font-semibold" style={{ border: "1px solid hsla(254,100%,64%,0.4)", color: "inherit" }}>
+              {t}
+            </span>
+          ))}
+        </div>
+        <p className="max-w-2xl mx-auto text-base md:text-lg opacity-60 leading-relaxed">
+          Whether you're building your first client roster or scaling to 20+ clients, AP Digital creates a marketing system that fits your coaching niche and budget.
+        </p>
+      </div>
+    </Section>
+  );
+}
+
 /* ─── FOOTER ─── */
 function Footer() {
   return (
-    <footer className="section-deep py-10 px-5 text-center">
+    <footer className="section-deep py-10 px-5 text-center space-y-2">
       <p className="text-sm opacity-40">© 2026 AP Digital — Pitt Meadows, BC Canada</p>
-      <p className="text-sm opacity-40 mt-1">apdigital.core@gmail.com</p>
+      <p className="text-sm opacity-40">hello@ap-digital.ca</p>
+      <p className="text-sm">
+        <a href="https://ap-digital.ca" className="opacity-60 hover:opacity-100 underline transition-opacity duration-200">
+          ← Back to AP Digital | Full-Service Digital Marketing
+        </a>
+      </p>
     </footer>
   );
 }
@@ -422,15 +520,18 @@ export default function LandingPage() {
   return (
     <div className="pb-16 md:pb-0">
       <HeroSection />
+      <LeadForm />
       <SocialProofBar />
       <ProblemSection />
       <SystemSection />
       <OfferSection />
-      <WhoIsForSection />
       <TestimonialsSection />
+      <WhoIsForSection />
       <FAQSection />
       <GuaranteeSection />
       <FinalCTASection />
+      <CoachingTypesSection />
+      <LeadForm />
       <Footer />
       <MobileStickyBar />
     </div>
