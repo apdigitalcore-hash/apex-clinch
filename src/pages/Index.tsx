@@ -487,7 +487,7 @@ function CoachingTypesSection() {
 function Footer() {
   return (
     <footer className="section-deep py-10 px-5 text-center space-y-2">
-      <p className="text-sm opacity-40">© 2026 AP Digital — Pitt Meadows, BC Canada</p>
+      <p className="text-sm opacity-40">© 2026 AP Digital — Vancouver, BC Canada</p>
       <p className="text-sm opacity-40">apdigital.core@gmail.com</p>
       <p className="text-sm">
         <a href="https://ap-digital.ca" className="opacity-60 hover:opacity-100 underline transition-opacity duration-200">
@@ -537,3 +537,4 @@ export default function LandingPage() {
     </div>
   );
 }
+
